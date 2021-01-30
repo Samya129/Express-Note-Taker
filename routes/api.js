@@ -1,6 +1,8 @@
 const fs= require("fs");
 const path = require("path");
 const dbJson = require("../db/db.json")
+const { v4: uuidv4 } = require('uuid');
+//installed random id generator and copied syntax needed to work
 
 module.exports = function(app){
     app.get("/api/notes", function(req, res){
@@ -10,6 +12,8 @@ module.exports = function(app){
 
     app.post("/api/notes", function(req, res){
         var data = req.body;
+        data.id= uuidv4();
+        //defined the unique id to my code.
         //console.log(data);
         //pushing data into array of dbJson
         dbJson.push(data);
