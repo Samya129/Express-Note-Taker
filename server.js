@@ -1,10 +1,11 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 
 //Set up an Express Application
-var app = express();
-var PORT = process.env.PORT || 3003
+const app = express();
+const PORT = process.env.PORT || 3003
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());

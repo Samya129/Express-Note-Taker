@@ -1,8 +1,8 @@
 const fs= require("fs");
-const path = require("path");
+
 
 //dirname =absolute path
-var path = require("path");
+const path = require("path");
 module.exports = function(app){
     // Basic route that sends the user first to the AJAX Page
     app.get("/notes", function(req, res) {
