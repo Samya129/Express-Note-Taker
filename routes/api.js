@@ -11,9 +11,9 @@ module.exports = function (app) {
 
   //POST request
   app.post("/api/notes", function (req, res) {
-    var data = req.body;
-    data.id = uuidv4();
-    notes.push(data);
+    var newData = req.body;
+    newData.id = uuidv4();
+    notes.push(newData);
     fs.writeFile(
       path.join(__dirname, "../db/db.json"),
       JSON.stringify(notes),
@@ -26,9 +26,9 @@ module.exports = function (app) {
 
   //DELETE request
   app.delete("/api/notes/:id", function (req, res) {
-    var noteId = req.params.id;
-    //console.log(noteId);
-    notes = notes.filter((note) => note.id != noteId);
+    var noteIdDelete = req.params.id;
+    //console.log(noteDelete);
+    notes = notes.filter((note) => note.id != noteIdDelete);
     res.json(notes);
   });
 }; //console.log(notes);
