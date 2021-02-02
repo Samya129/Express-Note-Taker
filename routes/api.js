@@ -1,7 +1,7 @@
 const fs= require("fs");
 //need fs to serve the html documents
 const path = require("path");
-const dbJsonArr = require("../db/db.json")
+let notes = require("../db/db.json")
 const { v4: uuidv4 } = require('uuid');
 // const indexJs = require("")
 
@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = function(app){
     app.get("/api/notes", function(req, res){
         // return 
-        res.json(dbJsonArr);
+        res.json(notes);
     })
 
     app.post("/api/notes", function(req, res){
@@ -17,49 +17,28 @@ module.exports = function(app){
         data.id= uuidv4();
         //defined the unique id to the data of my code.
         //console.log(data);
-        //pushing data into dbJsonArr
-        dbJsonArr.push(data);
-        fs.writeFile(path.join(__dirname, "../db/db.json"),JSON.stringify(dbJsonArr),
-        function(err, dbJsonArr){
-            //in this case, dbJsonArr is the 'data' array which are the contents inside of the array.
+        //pushing data into notes
+        notes.push(data);
+        fs.writeFile(path.join(__dirname, "../db/db.json"),JSON.stringify(notes),
+        function(err, notes){
+            //in this case, notes is the 'data' array which are the contents inside of the array.
             if(err)throw err;
             //if wrong throw error, if not take the response.json and push the new array of data and show the user the information.
-            res.json(dbJsonArr);  
+            res.json(notes);  
         }) 
     })
-    // app.delete("/api.notes/:id", function (req, res){
-    //     const data = req.params.id;
-    //     data.filter(data => data.id != data);
-    //     fs.writeFile(path.join(__dirname, "../db/db.json"),JSON.stringify(dbJsonArr),
-    //     function(err, dbJsonArr){
-    //         if(err)throw err; 
-    //         res.json(dbJsonArr);  
-    //     }) 
+    app.delete("/api/notes/:id", function (req, res){
+        // : means requesting from the client
+        var noteId = req.params.id;
+        console.log(noteId);
+        notes = notes.filter( note => note.id != noteId)
+        res.json(notes)
+        //console.log(notes.filter( note => note.id != noteId));
+        //filter does not save so we need to change it by replacing the original with modified.
        
-    //     });
-
+        });
 
 
     }
    
-console.log(dbJsonArr);
-// let index = 0
-// dbJsonArr.indexOf[2]
-// const uniqueId = data.id;
-//     const result = uniqueId.filter(deleteNote)
-//     console.log(result)
-
-    // //Create a new array to 
-    // // newArray = dbJson.filter(function (idObject) {
-    // //     return idObject != 
-    // // }
-    // //newArray.splice()
-    // //dbJson.push(data).map
-    // // let currentListNotes = dbJson.map
-    // deleteNote(req.params.id)
-
-    // read notes, remove one, write it back 
-    // gather the current notes in an array
-    // remove the one that matches id
-    // write the new array back to the file system
-    // map, .find, indexOf, splice, filter?
+console.log(notes);

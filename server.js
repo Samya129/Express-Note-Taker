@@ -6,6 +6,7 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3003
 
+// Sets up the Express app to handle data parsing(middle-ware)
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 //Serve static js files with Express/can be used multiple times
