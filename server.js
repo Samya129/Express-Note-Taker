@@ -17,5 +17,5 @@ require("./routes/html")(app);
 
 //Starting the server
 app.listen(PORT, function () {
-  console.log("it's working" + PORT);
+  //console.log("it's working" + PORT);
 });

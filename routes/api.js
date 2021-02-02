@@ -27,7 +27,7 @@ module.exports = function (app) {
   //DELETE request
   app.delete("/api/notes/:id", function (req, res) {
     var noteId = req.params.id;
-    console.log(noteId);
+    //console.log(noteId);
     notes = notes.filter((note) => note.id != noteId);
     res.json(notes);
   });
